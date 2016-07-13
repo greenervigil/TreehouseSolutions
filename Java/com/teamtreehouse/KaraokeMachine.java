@@ -3,8 +3,7 @@ package com.teamtreehouse;
 import com.teamtreehouse.model.Song;
 import com.teamtreehouse.model.SongBook;
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class KaraokeMachine {
  private SongBook mSongBook;
@@ -17,10 +16,11 @@ public class KaraokeMachine {
    mMenu = new HashMap<String, String>();
 
    mMenu.put("Add", "Add a new song to the song book.");
+   mMenu.put("Choose", "Choose a song to sing.");
    mMenu.put("Quit", "Exit the program.");
  }
 
-  private String promptAction(){
+  private String promptAction()throws IOException{
     System.out.printf("There are %d songs available.  Your options are: %n", mSongBook.getSongCount());
 
     for (Map.Entry<String, String> option : mMenu.entrySet()) {
@@ -41,6 +41,12 @@ public class KaraokeMachine {
             Song song = promptNewSong();
             mSongBook.addSong(song);
             System.out.printf("%s added.  %n%n%n, song");
+            break;
+          case "chose":
+            String artist = promptArtist();
+            Song artistSong = promptSongForArtist(artist);
+            //TODO: add to a song queue
+            System.out.printf("You chose %s %n" , artistSong);
             break;
           case "quit":
             System.out.println("Thanks for playing!");
@@ -68,7 +74,24 @@ public class KaraokeMachine {
 
   }
 
-  private int promtForIntex(List<String> options) throws IOException {
+  private String promptArtist() throws IOException {
+    System.out.println("Available Artists:  ");
+    List<String> artists = new ArrayList<>(mSongBook.getArtist());
+    int index = promptForIndex(artists);
+    return artists.get(index);
+  }
+
+  private Song promptSongForArtist(String artist) throws IOException {
+    List<Song> songs = mSongBook.getSongsForArtist(artist);
+    List<String> songTitles = new ArrayList<>();
+    for (Song song : songs) {
+      songTitles.add(song.getTitle());
+    }
+    int index = promptForIndex(songTitles);
+    return songs.get(index);
+  }
+
+  private int promptForIndex(List<String> options) throws IOException {
     int counter = 0;
     for (String s : options) {
       System.out.printf("%d.)  %s %n", counter, s);
