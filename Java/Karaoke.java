@@ -5,13 +5,11 @@ public class Karaoke {
 
   public static void main (String[] args) {
 
-  Song song = new Song(
-    "Michael Jackson",
-    "Beat It",
-    "https://www.youtube.com/watch?v=SaEC9i9QOvk");
-
   SongBook songBook = new SongBook();
+  songBook.importFrom("songs.txt");
   KaraokeMachine machine = new KaraokeMachine(songBook);
   machine.run();
+  System.out.println("Saving Book......");
+  songBook.exportTo("songs.txt");
   }
 }
