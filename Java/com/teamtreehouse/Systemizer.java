@@ -5,15 +5,15 @@ import java.util.TreeSet;
 
 public class Systemizer {
 
-  public static void main(String[] args) {
-    System.out.printf("This is the classpath:  %s %n",
-                      System.getProperty("java.class.path"));
-    Set<String> propNames = new TreeSet<String>(System.getProperties().stringPropertyNames());
-    for (String propertyName : propNames) {
-      System.out.printf("%s is %s %n",
-                        propertyName,
-                        System.getProperty(propertyName));
-    }
+    public static void main(String[] args) {
+        System.out.printf("This is the classpath:  %s %n",
+                System.getProperty("java.class.path"));
+        Set<String> propNames = new TreeSet<String>(System.getProperties().stringPropertyNames());
+        for (String propertyName : propNames) {
+            System.out.printf("%s is %s %n",
+                    propertyName,
+                    System.getProperty(propertyName));
+        }
 
-  }
+    }
 }
