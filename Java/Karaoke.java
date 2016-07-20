@@ -1,15 +1,15 @@
 import com.teamtreehouse.KaraokeMachine;
-import com.teamtreehouse.model.*;
+import com.teamtreehouse.model.SongBook;
 
 public class Karaoke {
 
-  public static void main (String[] args) {
+    public static void main(String[] args) {
 
-  SongBook songBook = new SongBook();
-  songBook.importFrom("songs.txt");
-  KaraokeMachine machine = new KaraokeMachine(songBook);
-  machine.run();
-  System.out.println("Saving Book......");
-  songBook.exportTo("songs.txt");
-  }
+        SongBook songBook = new SongBook();
+        songBook.importFrom("songs.txt");
+        KaraokeMachine machine = new KaraokeMachine(songBook);
+        machine.run();
+        System.out.println("Saving Book......");
+        songBook.exportTo("songs.txt");
+    }
 }
