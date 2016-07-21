@@ -27,8 +27,11 @@ def game():
             guesses.append(guess)
     else:
         print("You lose.  My number was {}".format(secret_num))
+
     play_again = input("Do you want to play again? Y/n ")
     if play_again.lower() != 'n':
         game()
     else:
+        print("Bye!")
+
 game()
